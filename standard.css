@@ -1,0 +1,107 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    text-decoration: none;
+    position: relative;
+}
+
+@font-face {
+    font-family: "PokemonSolid";
+    src: url("/assets/fonts/Pokemon Solid.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "PokemonHollow";
+    src: url("/assets/fonts/Pokemon Hollow.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "PressStart";
+    src: url("./assets/fonts/PressStart2P-Regular.ttf") format("truetype");
+}
+
+body {
+    font-family: "PressStart";
+}
+
+.content {
+    width: 100%;
+    max-width: 1920px;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+}
+
+.d_none {
+    display: none;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.fire {
+    background-color: #FF421C;
+}
+
+.water {
+    background-color: #2C9BE3;
+}
+
+.grass {
+    background-color: #62BC5A;
+}
+
+.bug {
+    background-color: #92C12A;
+}
+
+.dragon {
+    background-color: #5670BE;
+}
+
+.electric {
+    background-color: #FFDC00;
+}
+
+.fighting {
+    background-color: #BB5544;
+}
+
+.flying {
+    background-color: #96CAFF;
+}
+
+.ghost {
+    background-color: #6E4370;
+}
+
+.ground {
+    background-color: #A67439;
+}
+
+.ice {
+    background-color: #74CFC0;
+}
+
+.normal {
+    background-color: #BBBBAA;
+}
+
+.poison {
+    background-color: #9553CD;
+}
+
+.psychic {
+    background-color: #FF6380;
+}
+
+.rock {
+    background-color: #BBAA66;
+}
+
+.fairy {
+    background-color: #EC8FE6;
+}

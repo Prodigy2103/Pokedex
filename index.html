@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="./assets/icon/icons8-pokemon-pointer-48.png" />
+        <link rel="stylesheet" href="standard.css" />
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="style/spinner.css" />
+        <title>Pokedex</title>
+    </head>
+    <body>
+        <!-- header content h1 img -->
+        <header>
+            <div class="content">
+                <h1>Pokedex</h1>
+                <img src="./assets/icon/lock.png" alt="" />
+            </div>
+        </header>
+
+        <main>
+            <!-- div content ,form input, 2x, section card, button load pokemon -->
+            <div class="content">
+                <form action="">
+                    <input
+                        id="searchBar"
+                        class="searchBarInput"
+                        type="text"
+                        placeholder="Search Pokemon"
+                    />
+                    <input class="searchBarBtn" type="button" />
+                    <!-- onclick search -->
+                </form>
+            </div>
+
+            <section id="pokeCards"></section>
+
+            <div id="loadSpinner" class="d_none">
+                <p class="loader"></p>
+            </div>
+            <!-- onclick load -->
+            <div class="loadBtn">
+                <button type="button" onclick="getPokeApi()">load more</button>
+            </div>
+        </main>
+        <!-- section overview onclick-->
+        <div id="overView" class="d_none">
+                
+        </div>
+        <!-- footer a link -->
+
+        <footer>
+            <a href=""></a>
+        </footer>
+
+        <script src="template.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
