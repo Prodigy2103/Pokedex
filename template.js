@@ -20,7 +20,7 @@ function getViewCard({ spiritTwo, id, name, index, height, weight, abilities, ty
                         <span>${name}</span>
                         <span>${id}</span>
                     </div>
-                    <img src="${spiritTwo}" alt="<">
+                    <img src="${spiritTwo}" alt="">
                     <div class="viewCardTypes" id="viewCardType${index}">
                     </div>
                 </div>
