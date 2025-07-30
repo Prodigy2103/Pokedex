@@ -13,7 +13,8 @@ class pokemonInfo {
     type = [];
     abilities = [];
 
-    statics = { // Deklariert 'statics' als Objekt, das die Basiswerte (Statistiken) des Pokemons enthält.
+    statics = {
+        // Deklariert 'statics' als Objekt, das die Basiswerte (Statistiken) des Pokemons enthält.
         hp: 0,
         attack: 0,
         defense: 0,
@@ -23,7 +24,17 @@ class pokemonInfo {
     }; // #endregion
 
     // Der 'constructor' ist die Methode, die automatisch aufgerufen wird, wenn ein neues Objekt der Klasse erstellt wird.
-    constructor({cName, cSpiritOne, cSpiritTwo, cIndex, cType, cStatics, cAbilities, cWeight, cHeight,}) {
+    constructor({
+        cName,
+        cSpiritOne,
+        cSpiritTwo,
+        cIndex,
+        cType,
+        cStatics,
+        cAbilities,
+        cWeight,
+        cHeight,
+    }) {
         this.name = cName;
         this.spiritOne = cSpiritOne;
         this.spiritTwo = cSpiritTwo;
@@ -49,8 +60,14 @@ let currentPokemonOffset = 0;
 async function getPokeApi() {
     const limit = 30;
 
-    for (let i = currentPokemonOffset + 1; i <= currentPokemonOffset + limit; i++) {
-        const pokemonResponse = await fetch("https://pokeapi.co/api/v2/pokemon/" + i);
+    for (
+        let i = currentPokemonOffset + 1;
+        i <= currentPokemonOffset + limit;
+        i++
+    ) {
+        const pokemonResponse = await fetch(
+            "https://pokeapi.co/api/v2/pokemon/" + i
+        );
         const pokemonJson = await pokemonResponse.json();
 
         pokemonArray.push(
@@ -61,7 +78,9 @@ async function getPokeApi() {
                 cWeight: pokemonJson.weight,
                 cIndex: pokemonJson.id,
                 cSpiritOne: pokemonJson.sprites.front_default,
-                cSpiritTwo: pokemonJson.sprites.other?.["official-artwork"]?.front_default || null,
+                cSpiritTwo:
+                    pokemonJson.sprites.other?.["official-artwork"]
+                        ?.front_default || null,
                 cType: pokemonJson.types,
                 cStatics: pokemonJson.stats,
             })
@@ -69,7 +88,8 @@ async function getPokeApi() {
     }
     currentPokemonOffset += limit;
     spinnerEnd();
-    renderCards(pokemonArray);}
+    renderCards(pokemonArray);
+}
 
 function renderCards(array) {
     const cardSectionRef = document.getElementById("pokeCards");
@@ -91,28 +111,64 @@ function renderCards(array) {
 function renderTypes(index, array) {
     const typeDiv = document.getElementById(`type${index}`);
     if (typeDiv) {
-        typeDiv.innerHTML = array[index].type.map(t => `<span class="type-tag ${t}">${t}</span>`).join('');
+        typeDiv.innerHTML = array[index].type
+            .map((t) => `<span class="type-tag ${t}">${t}</span>`)
+            .join("");
     }
 }
 
 function spinnerLoad() {
-    const loadRef = document.getElementById('loadSpinner');
-    loadRef.classList.add('d-flex');
+    const loadRef = document.getElementById("loadSpinner");
+    loadRef.classList.add("d-flex");
 }
 
 function spinnerEnd() {
-    const loadRef = document.getElementById('loadSpinner');
-    loadRef.classList.add('d_none');
+    const loadRef = document.getElementById("loadSpinner");
+    loadRef.classList.add("d_none");
 }
 
-// Starte den Vorgang
+// // Starte den Vorgang
 getPokeApi();
 
 // TODO next Step overview template function schreiben und render function und searchbar function
-function renderViewCard() {
-    const viewCardRef = document.getElementById('overView');
 
-    viewCardRef.innerHTML = getViewCard({
-        
-    })
+function renderViewCard(array) {
+    const viewCardRef = document.getElementById("overView");
+    if (!viewCardRef) {
+        console.error("Element mit ID 'overView' nicht gefunden.");
+        return;
+    }
+    viewCardRef.innerHTML = ""; // Leert den Container vor dem Rendern
+
+    for (let i = 0; i < array.length; i++) {
+        // Fügt die generierte View Card zum Container hinzu
+        viewCardRef.innerHTML += getViewCard({
+            spiritOne: array[i].spiritOne,
+            id: array[i].id,
+            name: array[i].name,
+            index: i,
+            abilities: array[i].abilities,
+            type: array[i].type[0], // Erster Typ für die Headline-Klasse
+            height: array[i].height,
+            weight: array[i].weight,
+        });
+
+        // Ruft die Funktion zum Rendern der Typen auf
+        renderTypes(i, array[i].type); // array[i].type ist hier ein Array von Typ-Strings
+    }
+}
+
+
+function showViewCard() {
+    const viewCardRef = document.getElementById("overView");
+    viewCardRef.classList.remove("d_none");
+    viewCardRef.classList.add("d-flex");
+}
+
+function hideViewCard(event) {
+    const viewCardRef = document.getElementById("overView");
+    if (event.target === viewCardRef) {
+        viewCardRef.classList.remove("d-flex");
+        viewCardRef.classList.add("d_none");
+    }
 }

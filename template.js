@@ -1,6 +1,6 @@
 function getCardInfo({ spiritOne, id, name, index, type }) {
     return /*html*/ ` 
-        <div class="card" onclick="">
+        <div class="card" onclick="showViewCard()">
                 <img src="${spiritOne}" alt="">
             <div class="cardInfos">
                 <p># ${id}</p>
@@ -12,7 +12,7 @@ function getCardInfo({ spiritOne, id, name, index, type }) {
 `;
 }
 
-function getViewCard({ spiritTwo, id, name, index, height, weight, abilities, type }) {
+function getViewCard({ type, name, id, spiritOne, index, height, weight, abilities }) {
     return /*html*/ `
         <div class="viewCard">
                 <div class="viewMainCard">
@@ -20,7 +20,7 @@ function getViewCard({ spiritTwo, id, name, index, height, weight, abilities, ty
                         <span>${name}</span>
                         <span>${id}</span>
                     </div>
-                    <img src="${spiritTwo}" alt="">
+                    <img src="${spiritOne}" alt="">
                     <div class="viewCardTypes" id="viewCardType${index}">
                     </div>
                 </div>
@@ -50,8 +50,8 @@ function getViewCard({ spiritTwo, id, name, index, height, weight, abilities, ty
                 </div>
 
                 <div class="viewCardBtn">
-                    <button onclick="backward">back</button>
-                    <button onclick="forward">next</button>
+                    <button onclick="backward()">back</button>
+                    <button onclick="forward()">next</button>
                 </div>
             </div>
     `;
