@@ -125,69 +125,72 @@ function spinnerEnd() {
     loadRef.classList.remove('d-flex');
 }
 
-// // Starte den Vorgang
+//  Starte den Vorgang
 getPokeApi();
 
 // TODO next Step overview template function schreiben und render function und searchbar function
 
 function renderViewCard(array) {
     const viewCardRef = document.getElementById("overView");
+    if (!viewCardRef) return;
+
     viewCardRef.innerHTML = ""; // Leert den Container vor dem Rendern
 
     for (let i = 0; i < array.length; i++) {
-        // Fügt die generierte View Card zum Container hinzu
+        const p = array[i];
         viewCardRef.innerHTML += getViewCard({
-            spiritOne: array[i].spiritOne,
-            id: array[i].id,
-            name: array[i].name,
+            spiritOne: p.spiritOne,
+            id: p.id,
+            name: p.name,
             index: i,
-            abilities: array[i].abilities,
-            type: array[i].type[0], // Erster Typ für die Headline-Klasse
-            height: array[i].height,
-            weight: array[i].weight,
+            abilities: p.abilities,
+            type: p.type[0],
+            height: p.height,
+            weight: p.weight,
+            statics: p.statics,
         });
-
-        // Ruft die Funktion zum Rendern der Typen auf, um die Typ-Tags in der View Card anzuzeigen
-        renderTypes(i, array);
     }
 }
 
-function showViewCard() {
+function showSingleView(index) {
+    const selectedPokemon = pokemonArray[index];
+    showViewCard([selectedPokemon]); // Übergib als Array
+}
+
+function showViewCard(array) {
     const viewCardRef = document.getElementById("overView");
     if (viewCardRef) {
         viewCardRef.classList.remove("d_none");
         viewCardRef.classList.add("d-flex");
     }
+    renderViewCard(array);
+    console.log("Detailansicht angezeigt:", array);
 }
 
-function hideViewCard(event) {
+function hideViewCard() {
     const viewCardRef = document.getElementById("overView");
-    if (viewCardRef && event.target === viewCardRef) {
+    if (viewCardRef) {
         viewCardRef.classList.remove("d-flex");
         viewCardRef.classList.add("d_none");
     }
 }
 
-// function search() {
-//     const inputRef = document.getElementById('searchBar');
-//     const inputValue = inputRef.value.toLowerCase();
-
-//     if (inputValue.length >= 3) {
-//         const result = pokemonArray.filter(pokemon => pokemon.nameLowerCase.includes(inputValue))
-
-//         renderCardSection(result);
-//     } if (inputValue == "") {
-//         renderCardSection(pokemonArray);
-//     }
-// }
+function checkHideViewCard(event) {
+    const viewCard = document.querySelector(".view-card");
+    
+    // Wenn außerhalb des View-Cards geklickt wurde
+    if (!viewCard.contains(event.target)) {
+        hideViewCard();
+    }
+}
 
 function search() {
     const inputRef = document.getElementById('searchBar');
     const inputValue = inputRef.value.toLowerCase(); // Den Input-Wert direkt in Kleinbuchstaben umwandeln
 
-    // Filtere das pokemonArray basierend auf dem Namen.
-    // Wir wandeln auch den Pokemon-Namen in Kleinbuchstaben um, um einen
-    // "case-insensitiven" Vergleich zu gewährleisten.
+    // Filtert das pokemonArray basierend auf dem Namen.
+    // wandeln auch den Pokemon-Namen in Kleinbuchstaben um, um einen
+    // um den Vergleich zu gewährleisten.
     const result = pokemonArray.filter(pokemon => pokemon.name.toLowerCase().includes(inputValue));
 
     // Überprüfe die Länge des eingegebenen Suchbegriffs
@@ -201,3 +204,4 @@ function search() {
     // Wenn der Input weniger als 3 Zeichen lang und nicht leer ist,
     // wird der aktuelle Zustand der Karten beibehalten, bis mehr eingegeben wird.
 }
+
