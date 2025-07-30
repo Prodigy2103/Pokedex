@@ -54,7 +54,7 @@ main {
         }
     }
 }
-
+/* #region pokeCard */
 section {
     display: flex;
     justify-content: center;
@@ -142,7 +142,9 @@ section {
         border-radius: 1rem;
     }
 }
+/* #endregion */
 
+/* #region overview */
 #overView {
     position: fixed;
     top: 0;
@@ -172,7 +174,7 @@ section {
 
     img {
         width: 100%;
-        height: auto;
+        height: 30dvh;
     }
 
     .viewMainCard {
@@ -186,8 +188,9 @@ section {
             display: flex;
             justify-content: space-between;
             padding: 0.8rem 1.6rem;
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
+            border-radius: 15px;
+            color: white;
+            box-shadow: 2px 2px 4px black;
         }
 
         .viewCardTypes {
@@ -248,12 +251,17 @@ section {
         display: flex;
         justify-content: space-around;
         align-items: center;
-    }
+        gap: 1rem;
 
-    h2 {
-        text-align: center;
-        gap: 30px;
-        border: 2px solid red;
+        button {
+            width: 50%;
+            height: 3dvh;
+            background: red;
+        }
+
+        button:hover {
+            background: orange;
+        }
     }
 }
 
@@ -277,23 +285,34 @@ section {
     margin: 4px 0;
 }
 
-.nav-btns {
+.viewCardTypes {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 12px;
-}
 
-.nav-btns button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    font-size: 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+    .type-tag {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 4px 12px;
+        margin: 4px;
+        border-radius: 8px;
+        color: white;
+        font-weight: bold;
+        font-family: "PressStart";
+        font-size: 14px;
+        text-transform: lowercase;
+        box-shadow: 2px 2px 4px black;
+    }
 
-.nav-btns button:hover {
-    background-color: #0056b3;
+    /* Farben wie in deinem Bild */
+    .type-tag.grass {
+        width: 50%;
+        height: 4dvh;
+        background-color: #78c850;
+    }
+    .type-tag.poison {
+        width: 50%;
+        background-color: #a040a0;
+    }
 }
+/* #endregion */

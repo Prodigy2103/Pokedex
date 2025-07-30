@@ -55,6 +55,7 @@ class pokemonInfo {
 const pokemonArray = [];
 
 let currentPokemonOffset = 0;
+let currentViewIndex = 0;
 
 async function getPokeApi() {
     const limit = 30;
@@ -134,7 +135,7 @@ function renderViewCard(array) {
     const viewCardRef = document.getElementById("overView");
     if (!viewCardRef) return;
 
-    viewCardRef.innerHTML = ""; // Leert den Container vor dem Rendern
+    viewCardRef.innerHTML = ""; // Leert den Container
 
     for (let i = 0; i < array.length; i++) {
         const p = array[i];
@@ -144,15 +145,20 @@ function renderViewCard(array) {
             name: p.name,
             index: i,
             abilities: p.abilities,
-            type: p.type[0],
+            types: p.type,
             height: p.height,
             weight: p.weight,
             statics: p.statics,
         });
     }
+
+
+    // Optional: Typen-Rendering erneut aufrufen, falls du das brauchst
+    renderTypes(pokemonArray);
 }
 
 function showSingleView(index) {
+    currentViewIndex = index;
     const selectedPokemon = pokemonArray[index];
     showViewCard([selectedPokemon]); // Übergib als Array
 }
@@ -205,3 +211,18 @@ function search() {
     // wird der aktuelle Zustand der Karten beibehalten, bis mehr eingegeben wird.
 }
 
+function forward() {
+    if (currentViewIndex < pokemonArray.length - 1) {
+        currentViewIndex++;
+        const nextPokemon = pokemonArray[currentViewIndex];
+        showViewCard([nextPokemon]);
+    }
+}
+
+function backward() {
+    if (currentViewIndex > 0) {
+        currentViewIndex--;
+        const previousPokemon = pokemonArray[currentViewIndex];
+        showViewCard([previousPokemon]);
+    }
+}
