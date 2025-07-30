@@ -126,10 +126,7 @@ function spinnerEnd() {
     loadRef.classList.remove('d-flex');
 }
 
-//  Starte den Vorgang
 getPokeApi();
-
-// TODO next Step overview template function schreiben und render function und searchbar function
 
 function renderViewCard(array) {
     const viewCardRef = document.getElementById("overView");
@@ -151,9 +148,6 @@ function renderViewCard(array) {
             statics: p.statics,
         });
     }
-
-
-    // Optional: Typen-Rendering erneut aufrufen, falls du das brauchst
     renderTypes(pokemonArray);
 }
 
@@ -226,3 +220,6 @@ function backward() {
         showViewCard([previousPokemon]);
     }
 }
+
+// TODO: viewCard button function auf Fehler prüfen und Änderungen vornehmen damit es funktioniert
+//       function MainInfo und Basestats erstellen 
