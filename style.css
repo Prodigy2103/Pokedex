@@ -151,7 +151,7 @@ section {
     justify-content: center;
     align-items: center;
     font-family: 'Courier New', Courier, monospace;
-    z-index: 2;
+    z-index: 200;
 
     .viewCard {
         background-color: white;
