@@ -116,19 +116,13 @@ function renderTypes(index, array) {
 }
 
 function spinnerLoad() {
-    const loadRef = document.getElementById("loadSpinner");
-    if (loadRef) {
-        loadRef.classList.remove("d_none"); // Stelle sicher, dass es nicht versteckt ist
-        loadRef.classList.add("d-flex");
-    }
+    const loadRef = document.getElementById('loadSpinner');
+    loadRef.classList.add('d-flex');
 }
 
 function spinnerEnd() {
-    const loadRef = document.getElementById("loadSpinner");
-    if (loadRef) {
-        loadRef.classList.remove("d-flex"); // Entferne die Flex-Anzeige
-        loadRef.classList.add("d_none"); // Füge die Verbergen-Klasse hinzu
-    }
+    const loadRef = document.getElementById('loadSpinner');
+    loadRef.classList.remove('d-flex');
 }
 
 // // Starte den Vorgang
@@ -172,4 +166,38 @@ function hideViewCard(event) {
         viewCardRef.classList.remove("d-flex");
         viewCardRef.classList.add("d_none");
     }
+}
+
+// function search() {
+//     const inputRef = document.getElementById('searchBar');
+//     const inputValue = inputRef.value.toLowerCase();
+
+//     if (inputValue.length >= 3) {
+//         const result = pokemonArray.filter(pokemon => pokemon.nameLowerCase.includes(inputValue))
+
+//         renderCardSection(result);
+//     } if (inputValue == "") {
+//         renderCardSection(pokemonArray);
+//     }
+// }
+
+function search() {
+    const inputRef = document.getElementById('searchBar');
+    const inputValue = inputRef.value.toLowerCase(); // Den Input-Wert direkt in Kleinbuchstaben umwandeln
+
+    // Filtere das pokemonArray basierend auf dem Namen.
+    // Wir wandeln auch den Pokemon-Namen in Kleinbuchstaben um, um einen
+    // "case-insensitiven" Vergleich zu gewährleisten.
+    const result = pokemonArray.filter(pokemon => pokemon.name.toLowerCase().includes(inputValue));
+
+    // Überprüfe die Länge des eingegebenen Suchbegriffs
+    if (inputValue.length >= 3) {
+        // Wenn der Suchbegriff 3 oder mehr Zeichen hat, zeige die gefilterten Ergebnisse an.
+        renderCards(result); // Rufe deine vorhandene renderCards-Funktion auf
+    } else if (inputValue === "") {
+        // Wenn das Suchfeld leer ist, zeige wieder alle Pokemon an.
+        renderCards(pokemonArray); // Zeige alle ursprünglichen Pokemon an
+    }
+    // Wenn der Input weniger als 3 Zeichen lang und nicht leer ist,
+    // wird der aktuelle Zustand der Karten beibehalten, bis mehr eingegeben wird.
 }
