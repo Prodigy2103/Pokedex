@@ -2,7 +2,6 @@ class pokemonInfo {
     // #region attributes
 
     // Deklariert die Eigenschaft des Pokemons
-
     name;
     spiritOne;
     spiritTwo;
@@ -59,12 +58,10 @@ let currentPokemonOffset = 0;
 
 async function getPokeApi() {
     const limit = 30;
+    spinnerLoad(); // Starte den Spinner beim Abrufen von Daten
 
     for (
-        let i = currentPokemonOffset + 1;
-        i <= currentPokemonOffset + limit;
-        i++
-    ) {
+        let i = currentPokemonOffset + 1; i <= currentPokemonOffset + limit; i++) {
         const pokemonResponse = await fetch(
             "https://pokeapi.co/api/v2/pokemon/" + i
         );
@@ -87,13 +84,13 @@ async function getPokeApi() {
         );
     }
     currentPokemonOffset += limit;
-    spinnerEnd();
+    spinnerEnd(); // Beende den Spinner, nachdem die Daten abgerufen wurden
     renderCards(pokemonArray);
 }
 
 function renderCards(array) {
     const cardSectionRef = document.getElementById("pokeCards");
-    cardSectionRef.innerHTML = "";
+    cardSectionRef.innerHTML = ""; // Leere den Container vor dem Rendern
 
     for (let i = 0; i < array.length; i++) {
         cardSectionRef.innerHTML += getCardInfo({
@@ -104,7 +101,8 @@ function renderCards(array) {
             type: array[i].type[0], // erster Typ
         });
 
-        renderTypes(i, array); // falls du das definiert hast
+        // Stelle sicher, dass renderTypes korrekt aufgerufen wird
+        renderTypes(i, array);
     }
 }
 
@@ -119,12 +117,18 @@ function renderTypes(index, array) {
 
 function spinnerLoad() {
     const loadRef = document.getElementById("loadSpinner");
-    loadRef.classList.add("d-flex");
+    if (loadRef) {
+        loadRef.classList.remove("d_none"); // Stelle sicher, dass es nicht versteckt ist
+        loadRef.classList.add("d-flex");
+    }
 }
 
 function spinnerEnd() {
     const loadRef = document.getElementById("loadSpinner");
-    loadRef.classList.add("d_none");
+    if (loadRef) {
+        loadRef.classList.remove("d-flex"); // Entferne die Flex-Anzeige
+        loadRef.classList.add("d_none"); // Füge die Verbergen-Klasse hinzu
+    }
 }
 
 // // Starte den Vorgang
@@ -134,10 +138,6 @@ getPokeApi();
 
 function renderViewCard(array) {
     const viewCardRef = document.getElementById("overView");
-    if (!viewCardRef) {
-        console.error("Element mit ID 'overView' nicht gefunden.");
-        return;
-    }
     viewCardRef.innerHTML = ""; // Leert den Container vor dem Rendern
 
     for (let i = 0; i < array.length; i++) {
@@ -153,21 +153,22 @@ function renderViewCard(array) {
             weight: array[i].weight,
         });
 
-        // Ruft die Funktion zum Rendern der Typen auf
-        renderTypes(i, array[i].type); // array[i].type ist hier ein Array von Typ-Strings
+        // Ruft die Funktion zum Rendern der Typen auf, um die Typ-Tags in der View Card anzuzeigen
+        renderTypes(i, array);
     }
 }
 
-
 function showViewCard() {
     const viewCardRef = document.getElementById("overView");
-    viewCardRef.classList.remove("d_none");
-    viewCardRef.classList.add("d-flex");
+    if (viewCardRef) {
+        viewCardRef.classList.remove("d_none");
+        viewCardRef.classList.add("d-flex");
+    }
 }
 
 function hideViewCard(event) {
     const viewCardRef = document.getElementById("overView");
-    if (event.target === viewCardRef) {
+    if (viewCardRef && event.target === viewCardRef) {
         viewCardRef.classList.remove("d-flex");
         viewCardRef.classList.add("d_none");
     }
