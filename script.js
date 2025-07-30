@@ -176,7 +176,7 @@ function hideViewCard() {
 }
 
 function checkHideViewCard(event) {
-    const viewCard = document.querySelector(".view-card");
+    const viewCard = document.querySelector(".viewCard");
     
     // Wenn außerhalb des View-Cards geklickt wurde
     if (!viewCard.contains(event.target)) {
