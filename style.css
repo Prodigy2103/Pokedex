@@ -5,7 +5,7 @@ header {
 
     .content {
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
         height: 10dvh;
         gap: 2rem;
@@ -13,6 +13,10 @@ header {
         img {
             width: 48px;
             height: 48px;
+        }
+
+        .headLogo {
+            display: flex;
         }
     }
 }
@@ -219,7 +223,7 @@ section {
         }
 
         .contentDesc {
-            min-height: 15rem;
+            height: 8rem;
             width: 100%;
 
             table {
@@ -265,6 +269,35 @@ section {
     }
 }
 
+.infoDesc {
+    table {
+        height: 100%;
+        width: 100%;
+        padding: 0.8rem;
+
+        tbody {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            tr {
+                display: flex;
+
+                td {
+                    width: 50%;
+                }
+            }
+        }
+    }
+
+    .flex-space {
+        display: flex;
+        justify-content: end;
+    }
+}
+
 @keyframes fadeInUp {
     from {
         transform: translateY(100px);
@@ -274,15 +307,6 @@ section {
         transform: translateY(0);
         opacity: 1;
     }
-}
-
-.stats ul {
-    list-style: none;
-    padding: 0;
-}
-
-.stats li {
-    margin: 4px 0;
 }
 
 .viewCardTypes {

@@ -59,7 +59,6 @@ let currentViewIndex = 0;
 
 async function getPokeApi() {
     const limit = 30;
-    spinnerLoad(); // Starte den Spinner beim Abrufen von Daten
 
     for (
         let i = currentPokemonOffset + 1; i <= currentPokemonOffset + limit; i++) {
@@ -85,7 +84,6 @@ async function getPokeApi() {
         );
     }
     currentPokemonOffset += limit;
-    spinnerEnd(); // Beende den Spinner, nachdem die Daten abgerufen wurden
     renderCards(pokemonArray);
 }
 
@@ -116,40 +114,30 @@ function renderTypes(index, array) {
     }
 }
 
-function spinnerLoad() {
-    const loadRef = document.getElementById('loadSpinner');
-    loadRef.classList.add('d-flex');
-}
-
-function spinnerEnd() {
-    const loadRef = document.getElementById('loadSpinner');
-    loadRef.classList.remove('d-flex');
-}
-
 getPokeApi();
 
 function renderViewCard(array) {
     const viewCardRef = document.getElementById("overView");
     if (!viewCardRef) return;
 
-    viewCardRef.innerHTML = ""; // Leert den Container
+    const p = array[0]; // Nur das erste (und einzige) Pokémon
+    viewCardRef.innerHTML = ""; // Container leeren
 
-    for (let i = 0; i < array.length; i++) {
-        const p = array[i];
-        viewCardRef.innerHTML += getViewCard({
-            spiritOne: p.spiritOne,
-            id: p.id,
-            name: p.name,
-            index: i,
-            abilities: p.abilities,
-            types: p.type,
-            height: p.height,
-            weight: p.weight,
-            statics: p.statics,
-        });
-    }
-    renderTypes(pokemonArray);
+    viewCardRef.innerHTML = getViewCard({
+        spiritOne: p.spiritOne,
+        id: p.id,
+        name: p.name,
+        index: currentViewIndex,
+        abilities: p.abilities,
+        types: p.type,
+        height: p.height,
+        weight: p.weight,
+        statics: p.statics,
+    });
+
+    renderTypes([p.type]); // oder direkt p.type, je nachdem was die Funktion erwartet
 }
+
 
 function showSingleView(index) {
     currentViewIndex = index;
@@ -221,5 +209,44 @@ function backward() {
     }
 }
 
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        document.getElementById("loadSpinner").style.display = "none";
+        document.getElementById("pokeCards").style.display = "flex";
+    }, 1500)
+});
+
 // TODO: viewCard button function auf Fehler prüfen und Änderungen vornehmen damit es funktioniert
 //       function MainInfo und Basestats erstellen 
+function renderInfo(index) {
+    const desc = document.getElementById(`desc${index}`);
+    const stats = document.getElementById(`stats${index}`);
+    const navInfo = document.getElementById(`navInfo${index}`);
+    const navStats = document.getElementById(`navStats${index}`);
+
+    if (desc && stats && navInfo && navStats) {
+        desc.style.display = "block";
+        stats.style.display = "none";
+
+        // Optional: aktive Navigation visuell hervorheben
+        navInfo.classList.add("active");
+        navStats.classList.remove("active");
+    }
+}
+
+function renderStats(index) {
+    const desc = document.getElementById(`desc${index}`);
+    const stats = document.getElementById(`stats${index}`);
+    const navInfo = document.getElementById(`navInfo${index}`);
+    const navStats = document.getElementById(`navStats${index}`);
+
+    if (desc && stats && navInfo && navStats) {
+        desc.style.display = "none";
+        stats.style.display = "block";
+
+        // Optional: aktive Navigation visuell hervorheben
+        navInfo.classList.remove("active");
+        navStats.classList.add("active");
+    }
+}
+
