@@ -1,3 +1,4 @@
+// #region getCardInfo
 function getCardInfo({ spiritOne, id, name, index, type }) {
     return /*html*/ ` 
         <div class="card" onclick="showSingleView(${index})">
@@ -10,7 +11,9 @@ function getCardInfo({ spiritOne, id, name, index, type }) {
         </div>
     `;
 }
+// #endregion
 
+// #region getViewCard
 function getViewCard({
     types,
     name,
@@ -105,3 +108,4 @@ function getViewCard({
         </div>
     `;
 }
+// #endregion

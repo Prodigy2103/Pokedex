@@ -6,48 +6,60 @@
         <link rel="icon" href="./assets/icon/icons8-pokemon-pointer-48.png" />
         <link rel="stylesheet" href="standard.css" />
         <link rel="stylesheet" href="style.css" />
-        <link rel="stylesheet" href="load.css">
+        <link rel="stylesheet" href="load.css" />
         <link rel="stylesheet" href="style/spinner.css" />
         <title>Pokedex</title>
     </head>
     <body>
         <!-- header content h1 img -->
+        <!-- #region header -->
         <header>
             <div class="content">
                 <div class="headLogo">
-                <h1>Pokedex</h1>
-                <img src="./assets/icon/lock.png" alt="" />
+                    <h1>Pokedex</h1>
+                    <img src="./assets/icon/lock.png" alt="" />
                 </div>
                 <form action="">
-                    <input type="text" id="searchBar" class="searchBarInput" onkeyup="search()" placeholder="Pokemon suchen..."/>
+                    <input
+                        type="text"
+                        id="searchBar"
+                        class="searchBarInput"
+                        onkeyup="search()"
+                        placeholder="Pokemon suchen..."
+                    />
                     <input class="searchBarBtn" type="button" />
                     <!-- onclick search -->
                 </form>
             </div>
         </header>
+        <!-- #endregion -->
 
         <main>
-
             <div id="loadSpinner">
                 <p class="loader">
-                    <img src="./assets/icon/pokeball.png" alt="" class="pokeBall">
+                    <img
+                        src="./assets/icon/pokeball.png"
+                        alt=""
+                        class="pokeBall"
+                    />
                 </p>
             </div>
 
             <section id="pokeCards" class="d_none"></section>
 
-            
             <!-- onclick load -->
             <div class="loadBtn">
                 <button type="button" onclick="getPokeApi()">load more</button>
             </div>
 
-            <div id="overView" class="d_none" onclick="checkHideViewCard(event)">
-                
-        </div>
+            <div
+                id="overView"
+                class="d_none"
+                onclick="checkHideViewCard(event)"
+            ></div>
         </main>
         <!-- section overview onclick-->
-        
+
         <!-- footer a link -->
 
         <footer>
