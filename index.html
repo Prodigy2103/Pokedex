@@ -35,6 +35,7 @@
         <!-- #endregion -->
 
         <main>
+            <div class="content">
             <div id="loadSpinner">
                 <p class="loader">
                     <img
@@ -48,15 +49,18 @@
             <section id="pokeCards" class="d_none"></section>
 
             <!-- onclick load -->
-            <div class="loadBtn">
-                <button type="button" onclick="getPokeApi()">load more</button>
-            </div>
+            
 
             <div
                 id="overView"
                 class="d_none"
                 onclick="checkHideViewCard(event)"
             ></div>
+            </div>
+
+            <div class="loadBtn">
+                <button type="button" onclick="getPokeApi()">load more</button>
+            </div>
         </main>
         <!-- section overview onclick-->
 

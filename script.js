@@ -149,6 +149,24 @@ function renderViewCard(array) {
 }
 // #endregion
 
+// #region buttons
+function forward() {
+    if (currentViewIndex < pokemonArray.length + 1) {
+        currentViewIndex++;
+        const nextPokemon = pokemonArray[currentViewIndex];
+        showViewCard([nextPokemon]);
+    }
+}
+
+function backward() {
+    if (currentViewIndex - 1) {
+        currentViewIndex--;
+        const previousPokemon = pokemonArray[currentViewIndex];
+        showViewCard([previousPokemon]);
+    }
+}
+// #endregion
+
 // #region showView
 function showSingleView(index) {
     currentViewIndex = index;
@@ -171,12 +189,12 @@ function hideViewCard() {
 
 function checkHideViewCard(event) {
     const viewCard = document.querySelector(".viewCard");
-
     // Wenn außerhalb des View-Cards geklickt wurde
     if (!viewCard.contains(event.target)) {
         hideViewCard();
     }
 }
+
 // #endregion
 
 // #region searchBar
@@ -201,24 +219,6 @@ function search() {
     }
     // Wenn der Input weniger als 3 Zeichen lang und nicht leer ist,
     // wird der aktuelle Zustand der Karten beibehalten, bis mehr eingegeben wird.
-}
-// #endregion
-
-// #region buttons
-function forward() {
-    if (currentViewIndex < pokemonArray.length + 1) {
-        currentViewIndex++;
-        const nextPokemon = pokemonArray[currentViewIndex];
-        showViewCard([nextPokemon]);
-    }
-}
-
-function backward() {
-    if (currentViewIndex - 1) {
-        currentViewIndex--;
-        const previousPokemon = pokemonArray[currentViewIndex];
-        showViewCard([previousPokemon]);
-    }
 }
 // #endregion
 

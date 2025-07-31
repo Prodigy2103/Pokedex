@@ -62,7 +62,9 @@ function getViewCard({
                             </tr>
                             <tr>
                                 <td>Abilities:</td>
-                                <td class="flex-space">${abilities.join(", ")}</td>
+                                <td class="flex-space">${abilities.join(
+                                    ", "
+                                )}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -91,7 +93,9 @@ function getViewCard({
                         </tr>
                         <tr>
                             <td>SP- Defense</td>
-                            <td class="flex-space">${statics.specialDefense}</td>
+                            <td class="flex-space">${
+                                statics.specialDefense
+                            }</td>
                         </tr>
                         <tr>
                             <td>Speed</td>
@@ -100,12 +104,13 @@ function getViewCard({
                     </tbody>
                 </table>
             </div>
-
             <div class="viewCardBtn">
                 <button onclick="backward()">⬅ Back</button>
                 <button onclick="forward()">Next ➡</button>
             </div>
         </div>
+
+        
     `;
 }
 // #endregion
