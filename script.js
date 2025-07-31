@@ -57,11 +57,16 @@ const pokemonArray = [];
 let currentPokemonOffset = 0;
 let currentViewIndex = 0;
 
+
+// #region getPokeApi
 async function getPokeApi() {
     const limit = 30;
 
     for (
-        let i = currentPokemonOffset + 1; i <= currentPokemonOffset + limit; i++) {
+        let i = currentPokemonOffset + 1;
+        i <= currentPokemonOffset + limit;
+        i++
+    ) {
         const pokemonResponse = await fetch(
             "https://pokeapi.co/api/v2/pokemon/" + i
         );
@@ -86,7 +91,9 @@ async function getPokeApi() {
     currentPokemonOffset += limit;
     renderCards(pokemonArray);
 }
+// #endregion
 
+// #region rendeerCards
 function renderCards(array) {
     const cardSectionRef = document.getElementById("pokeCards");
     cardSectionRef.innerHTML = ""; // Leere den Container vor dem Rendern
@@ -113,9 +120,12 @@ function renderTypes(index, array) {
             .join("");
     }
 }
+// #endregion
 
 getPokeApi();
 
+
+// #region renderViewCard
 function renderViewCard(array) {
     const viewCardRef = document.getElementById("overView");
     if (!viewCardRef) return;
@@ -137,8 +147,9 @@ function renderViewCard(array) {
 
     renderTypes([p.type]); // oder direkt p.type, je nachdem was die Funktion erwartet
 }
+// #endregion
 
-
+// #region showView
 function showSingleView(index) {
     currentViewIndex = index;
     const selectedPokemon = pokemonArray[index];
@@ -147,39 +158,38 @@ function showSingleView(index) {
 
 function showViewCard(array) {
     const viewCardRef = document.getElementById("overView");
-    if (viewCardRef) {
-        viewCardRef.classList.remove("d_none");
-        viewCardRef.classList.add("d-flex");
-    }
+    viewCardRef.classList.toggle("d-flex");
+    document.body.classList.add("no-scroll");
     renderViewCard(array);
-    console.log("Detailansicht angezeigt:", array);
 }
 
 function hideViewCard() {
     const viewCardRef = document.getElementById("overView");
-    if (viewCardRef) {
-        viewCardRef.classList.remove("d-flex");
-        viewCardRef.classList.add("d_none");
-    }
+    viewCardRef.classList.toggle("d-flex");
+    document.body.classList.remove("no-scroll");
 }
 
 function checkHideViewCard(event) {
     const viewCard = document.querySelector(".viewCard");
-    
+
     // Wenn außerhalb des View-Cards geklickt wurde
     if (!viewCard.contains(event.target)) {
         hideViewCard();
     }
 }
+// #endregion
 
+// #region searchBar
 function search() {
-    const inputRef = document.getElementById('searchBar');
+    const inputRef = document.getElementById("searchBar");
     const inputValue = inputRef.value.toLowerCase(); // Den Input-Wert direkt in Kleinbuchstaben umwandeln
 
     // Filtert das pokemonArray basierend auf dem Namen.
     // wandeln auch den Pokemon-Namen in Kleinbuchstaben um, um einen
     // um den Vergleich zu gewährleisten.
-    const result = pokemonArray.filter(pokemon => pokemon.name.toLowerCase().includes(inputValue));
+    const result = pokemonArray.filter((pokemon) =>
+        pokemon.name.toLowerCase().includes(inputValue)
+    );
 
     // Überprüfe die Länge des eingegebenen Suchbegriffs
     if (inputValue.length >= 3) {
@@ -192,9 +202,11 @@ function search() {
     // Wenn der Input weniger als 3 Zeichen lang und nicht leer ist,
     // wird der aktuelle Zustand der Karten beibehalten, bis mehr eingegeben wird.
 }
+// #endregion
 
+// #region buttons
 function forward() {
-    if (currentViewIndex < pokemonArray.length - 1) {
+    if (currentViewIndex < pokemonArray.length + 1) {
         currentViewIndex++;
         const nextPokemon = pokemonArray[currentViewIndex];
         showViewCard([nextPokemon]);
@@ -202,31 +214,34 @@ function forward() {
 }
 
 function backward() {
-    if (currentViewIndex > 0) {
+    if (currentViewIndex - 1) {
         currentViewIndex--;
         const previousPokemon = pokemonArray[currentViewIndex];
         showViewCard([previousPokemon]);
     }
 }
+// #endregion
 
+// #region spinnerLoad
 window.addEventListener("load", () => {
     setTimeout(() => {
         document.getElementById("loadSpinner").style.display = "none";
         document.getElementById("pokeCards").style.display = "flex";
-    }, 1500)
+    }, 1500);
 });
+// #endregion
 
-// TODO: viewCard button function auf Fehler prüfen und Änderungen vornehmen damit es funktioniert
-
+// #region renderInfoStats
 function renderInfo(index) {
-    const desc = document.getElementById(`desc${index}`);
-    const stats = document.getElementById(`stats${index}`);
-    const navInfo = document.getElementById(`navInfo${index}`);
-    const navStats = document.getElementById(`navStats${index}`);
+    const desc = document.getElementById(`desc${index}`); // Holt das HTML-Element mit der ID desc + Index (z. B. desc1) und speichert es in desc.
+    const stats = document.getElementById(`stats${index}`); // Holt das HTML-Element mit der ID stats + Index (z. B. stats1) und speichert es in stats.
+    const navInfo = document.getElementById(`navInfo${index}`); // Holt das Navigations-Element für "Info" mit passender ID und speichert es in navInfo.
+    const navStats = document.getElementById(`navStats${index}`); // Holt das Navigations-Element für "Stats" mit passender ID und speichert es in navStats.
 
     if (desc && stats && navInfo && navStats) {
-        desc.style.display = "block";
-        stats.style.display = "none";
+        // Prüft, ob alle benötigten Elemente im DOM gefunden wurden (nicht null).
+        desc.style.display = "block"; // zeigt das display an
+        stats.style.display = "none"; // versteckt das display
     }
 }
 
@@ -241,4 +256,4 @@ function renderStats(index) {
         stats.style.display = "block";
     }
 }
-
+// #endregion
