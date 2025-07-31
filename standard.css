@@ -26,7 +26,6 @@ body {
     margin: 0;
     padding: 0;
     height: 100dvh;
-    overflow: hidden;
     font-family: "PressStart";
     font-size: clamp(7px, 2vw, 12px);
 }
