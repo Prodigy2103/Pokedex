@@ -217,7 +217,7 @@ window.addEventListener("load", () => {
 });
 
 // TODO: viewCard button function auf Fehler prüfen und Änderungen vornehmen damit es funktioniert
-//       function MainInfo und Basestats erstellen 
+
 function renderInfo(index) {
     const desc = document.getElementById(`desc${index}`);
     const stats = document.getElementById(`stats${index}`);
@@ -227,10 +227,6 @@ function renderInfo(index) {
     if (desc && stats && navInfo && navStats) {
         desc.style.display = "block";
         stats.style.display = "none";
-
-        // Optional: aktive Navigation visuell hervorheben
-        navInfo.classList.add("active");
-        navStats.classList.remove("active");
     }
 }
 
@@ -243,10 +239,6 @@ function renderStats(index) {
     if (desc && stats && navInfo && navStats) {
         desc.style.display = "none";
         stats.style.display = "block";
-
-        // Optional: aktive Navigation visuell hervorheben
-        navInfo.classList.remove("active");
-        navStats.classList.add("active");
     }
 }
 
