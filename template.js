@@ -14,18 +14,28 @@ function getCardInfo({ spiritOne, id, name, index, type }) {
 // #endregion
 
 // #region getViewCard
-function getViewCard(p) {
+function getViewCard({
+    types,
+    name,
+    id,
+    spiritOne,
+    index,
+    height,
+    weight,
+    abilities,
+    statics,
+}) {
     return /*html*/ `
-        <div class="viewCard ${p.type[0]}">
+        <div class="viewCard ${types[0]}">
             <div class="viewMainCard">
-                <div class="headline ${p.type[0]}">
-                    <span>#${p.id}</span>
-                    <span>${p.name}</span>
+                <div class="headline ${types[0]}">
+                    <span>#${id}</span>
+                    <span>${name}</span>
                 </div>
-                <img src="${p.spiritOne}" alt="${p.name}">
+                <img src="${spiritOne}" alt="${name}">
                 
-                <div class="viewCardTypes" id="viewCardType${currentViewIndex}">
-                    ${p.type
+                <div class="viewCardTypes" id="viewCardType${index}">
+                    ${types
                         .map(
                             (type) =>
                                 `<span class="type-tag ${type}">${type}</span>`
@@ -36,55 +46,60 @@ function getViewCard(p) {
 
             <div class="viewDesc">
                 <nav>
-                    <span id="navInfo${currentViewIndex}" class="hoverEffect" onclick="renderInfo(${currentViewIndex})">Maininfo</span>
-                    <span id="navStats${currentViewIndex}" onclick="renderStats(${currentViewIndex})">Statistic</span>
+                    <span id="navInfo${index}" class="hoverEffect" onclick="renderInfo(${index})">Maininfo</span>
+                    <span id="navStats${index}" onclick="renderStats(${index})">Statistic</span>
                 </nav>
-                <div id="desc${currentViewIndex}" class="contentDesc">
+                <div id="desc${index}" class="contentDesc">
                     <table>
                         <tbody>
                             <tr>
                                 <td>Height:</td>
-                                <td class="flex-space">${p.height}</td>
+                                <td class="flex-space">${height}</td>
                             </tr>
                             <tr>
                                 <td>Weight:</td>
-                                <td class="flex-space">${p.weight}</td>
+                                <td class="flex-space">${weight}</td>
                             </tr>
                             <tr>
                                 <td>Abilities:</td>
-                                <td class="flex-space">${p.abilities.join(", ")}</td>
+                                <td class="flex-space">${abilities.join(
+                                    ", "
+                                )}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <div class="infoDesc" id="stats${currentViewIndex}" style="display: none;">
+            <div class="infoDesc" id="stats${index}" style="display: none;">
                 <table>
+
                     <tbody>
                         <tr>
                             <td>HP</td>
-                            <td class="flex-space">${p.statics.hp}</td>
+                            <td class="flex-space">${statics.hp}</td>
                         </tr>
                         <tr>
                             <td>Attack</td>
-                            <td class="flex-space">${p.statics.attack}</td>
+                            <td class="flex-space">${statics.attack}</td>
                         </tr>
                         <tr>
                             <td>Defense</td>
-                            <td class="flex-space">${p.statics.defense}</td>
+                            <td class="flex-space">${statics.defense}</td>
                         </tr>
                         <tr>
                             <td>SP Attack</td>
-                            <td class="flex-space">${p.statics.specialAttack}</td>
+                            <td class="flex-space">${statics.specialAttack}</td>
                         </tr>
                         <tr>
                             <td>SP- Defense</td>
-                            <td class="flex-space">${p.statics.specialDefense}</td>
+                            <td class="flex-space">${
+                                statics.specialDefense
+                            }</td>
                         </tr>
                         <tr>
                             <td>Speed</td>
-                            <td class="flex-space">${p.statics.speed}</td>
+                            <td class="flex-space">${statics.speed}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -94,7 +109,8 @@ function getViewCard(p) {
                 <button onclick="forward()">Next ➡</button>
             </div>
         </div>
+
+        
     `;
 }
-
 // #endregion

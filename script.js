@@ -126,62 +126,26 @@ getPokeApi();
 
 
 // #region renderViewCard
-function renderViewCard([p]) {
+function renderViewCard([pokemon]) {
     const viewCardRef = document.getElementById("overView");
     if (!viewCardRef) return;
 
-    viewCardRef.innerHTML = getViewCard(p);
-    renderTypes([p.type]);
+    viewCardRef.innerHTML = ""; // Container leeren
+
+    viewCardRef.innerHTML = getViewCard({
+        spiritOne: pokemon.spiritOne,
+        id: pokemon.id,
+        name: pokemon.name,
+        index: currentViewIndex,
+        abilities: pokemon.abilities,
+        types: pokemon.type,
+        height: pokemon.height,
+        weight: pokemon.weight,
+        statics: pokemon.statics,
+    });
+
+    renderTypes();
 }
-
-// #endregion
-
-// #region buttons
-function forward() {
-    if (currentViewIndex < pokemonArray.length + 1) {
-        currentViewIndex++;
-        const nextPokemon = pokemonArray[currentViewIndex];
-        showViewCard([nextPokemon]);
-    }
-}
-
-function backward() {
-    if (currentViewIndex - 1) {
-        currentViewIndex--;
-        const previousPokemon = pokemonArray[currentViewIndex];
-        showViewCard([previousPokemon]);
-    }
-}
-// #endregion
-
-// #region showView
-function showSingleView(index) {
-    currentViewIndex = index;
-    const selectedPokemon = pokemonArray[index];
-    showViewCard([selectedPokemon]); // Übergib als Array
-}
-
-function showViewCard(array) {
-    const viewCardRef = document.getElementById("overView");
-    viewCardRef.classList.toggle("d-flex");
-    document.body.classList.add("no-scroll");
-    renderViewCard(array);
-}
-
-function hideViewCard() {
-    const viewCardRef = document.getElementById("overView");
-    viewCardRef.classList.toggle("d-flex");
-    document.body.classList.remove("no-scroll");
-}
-
-function checkHideViewCard(event) {
-    const viewCard = document.querySelector(".viewCard");
-    // Wenn außerhalb des View-Cards geklickt wurde
-    if (!viewCard.contains(event.target)) {
-        hideViewCard();
-    }
-}
-
 // #endregion
 
 // #region searchBar
