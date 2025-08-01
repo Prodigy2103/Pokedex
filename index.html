@@ -36,30 +36,31 @@
 
         <main>
             <div class="content">
-            <div id="loadSpinner">
-                <p class="loader">
-                    <img
-                        src="./assets/icon/pokeball.png"
-                        alt=""
-                        class="pokeBall"
-                    />
-                </p>
-            </div>
+                <div id="loadSpinner">
+                    <p class="loader">
+                        <img
+                            src="./assets/icon/pokeball.png"
+                            alt=""
+                            class="pokeBall"
+                        />
+                    </p>
+                </div>
 
-            <section id="pokeCards" class="d_none"></section>
+                <section id="pokeCards" class="d_none"></section>
 
-            <!-- onclick load -->
-            
+                <!-- onclick load -->
 
-            <div
-                id="overView"
-                class="d_none"
-                onclick="checkHideViewCard(event)"
-            ></div>
-            </div>
+                <div
+                    id="overView"
+                    class="d_none"
+                    onclick="checkHideViewCard(event)"
+                ></div>
 
-            <div class="loadBtn">
-                <button type="button" onclick="getPokeApi()">load more</button>
+                <div class="loadBtn">
+                    <button type="button" onclick="getPokeApi()">
+                        load more
+                    </button>
+                </div>
             </div>
         </main>
         <!-- section overview onclick-->
@@ -67,7 +68,14 @@
         <!-- footer a link -->
 
         <footer>
-            <a href=""></a>
+            <div class="content">
+            <a
+                href="https://www.flaticon.com/free-icons/pokeball"
+                title="pokémon Icons"
+                target="blank"
+                >Pokéball Icons take from Flaticon</a
+            >
+            </div>
         </footer>
 
         <script src="template.js"></script>

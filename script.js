@@ -93,7 +93,7 @@ async function getPokeApi() {
 }
 // #endregion
 
-// #region rendeerCards
+// #region renderCards
 function renderCards(array) {
     const cardSectionRef = document.getElementById("pokeCards");
     cardSectionRef.innerHTML = ""; // Leere den Container vor dem Rendern
@@ -126,27 +126,14 @@ getPokeApi();
 
 
 // #region renderViewCard
-function renderViewCard(array) {
+function renderViewCard([p]) {
     const viewCardRef = document.getElementById("overView");
     if (!viewCardRef) return;
 
-    const p = array[0]; // Nur das erste (und einzige) Pokémon
-    viewCardRef.innerHTML = ""; // Container leeren
-
-    viewCardRef.innerHTML = getViewCard({
-        spiritOne: p.spiritOne,
-        id: p.id,
-        name: p.name,
-        index: currentViewIndex,
-        abilities: p.abilities,
-        types: p.type,
-        height: p.height,
-        weight: p.weight,
-        statics: p.statics,
-    });
-
-    renderTypes([p.type]); // oder direkt p.type, je nachdem was die Funktion erwartet
+    viewCardRef.innerHTML = getViewCard(p);
+    renderTypes([p.type]);
 }
+
 // #endregion
 
 // #region buttons

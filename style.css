@@ -1,3 +1,4 @@
+/* #region header */
 header {
     width: 100%;
     height: 10dvh;
@@ -8,6 +9,7 @@ header {
     .content {
         display: flex;
         justify-content: space-around;
+        flex-direction: row;
         align-items: center;
         height: 10dvh;
         gap: 2rem;
@@ -19,58 +21,50 @@ header {
 
         .headLogo {
             display: flex;
+            align-items: center;
 
             @media (max-width: 580px) {
                 display: none;
             }
         }
+
+        form {
+            height: 2.25rem;
+            margin: 3rem 0;
+            display: flex;
+            align-items: center;
+            position: relative;
+
+            .searchBarInput {
+                width: 100%;
+                height: 3.5rem;
+                background-color: #fff5cd;
+                border: 2px solid white;
+                border-radius: 50px;
+                padding: 1rem 2.8rem 1rem 1.5rem;
+            }
+
+            .searchBarBtn {
+                height: 48px;
+                width: 48px;
+                border: none;
+                background: transparent url(./assets/icon/right.png) no-repeat center/cover;
+                position: absolute;
+                right: 3px;
+                cursor: pointer;
+            }
+        }
     }
 }
+/* #endregion */
+
 
 main {
     display: flex;
     justify-content: center;
-    flex-direction: column;
     background: rgb(144, 144, 71);
 }
 
-.content {
-    height: auto;
-
-    form {
-        height: 2.25rem;
-        margin: 3rem 0;
-        display: flex;
-        align-items: center;
-
-        .searchBarInput {
-            width: 100%;
-            height: 3.5rem;
-            background-color: #fff5cd;
-            border: 2px solid white;
-            border-radius: 50px;
-            padding: 1rem 2.8rem 1rem 1.5rem;
-            bottom: 1px;
-            left: 1px;
-
-            @media (max-width: 580px) {
-                width: 400px;
-            }
-        }
-        .searchBarBtn {
-            height: 48px;
-            width: 48px;
-            border: none;
-            background-color: transparent;
-            background-image: url(./assets/icon/right.png);
-            background-repeat: no-repeat;
-            background-size: cover;
-            position: absolute;
-            right: 3px;
-            cursor: pointer;
-        }
-    }
-}
 /* #region pokeCard */
 section {
     display: flex;
@@ -151,6 +145,7 @@ section {
 .loadBtn {
     display: flex;
     justify-content: center;
+    margin-bottom: 1rem;
 
     button {
         width: 100px;
@@ -233,10 +228,10 @@ section {
                 background-color: #ffcb05;
                 padding: 0.8rem;
                 cursor: pointer;
-            }
 
-            span:hover {
-                background-color: #ffea9b;
+                span:hover {
+                    background-color: #ffea9b;
+                }
             }
         }
 
@@ -250,11 +245,10 @@ section {
                 padding: 0.8rem;
 
                 tbody {
-                    width: 100%;
-                    height: 100%;
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
+                    height: 100%;
 
                     tr {
                         display: flex;
@@ -285,8 +279,8 @@ section {
         }
 
         button:hover {
-            background: lightsalmon;
-        }
+                background: lightsalmon;
+            }
     }
 }
 
@@ -297,11 +291,10 @@ section {
         padding: 0.8rem;
 
         tbody {
-            width: 100%;
-            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            height: 100%;
 
             tr {
                 display: flex;
@@ -349,6 +342,30 @@ section {
         width: 50%;
         height: 4dvh;
         box-shadow: 2px 2px 4px black;
+    }
+}
+/* #endregion */
+
+/* #region footer */
+footer {
+    width: 100%;
+    height: 10dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: calc(16px + 0.5dvw);
+    background: yellow;
+
+    .content {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 10dvh;
+        gap: 2rem;
+        
+        a {
+            color: black;
+        }
     }
 }
 /* #endregion */
